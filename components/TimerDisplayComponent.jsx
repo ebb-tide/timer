@@ -46,7 +46,7 @@ const AblyChatComponent = () => {
   }, [dueDate]);
 
   return (
-    <div>
+    <div className='timer'>
       {timerString}
     </div>
   )
