@@ -45,18 +45,22 @@ const AblyChatComponent = () => {
         ></textarea>
       </div>
 
-      <button onClick={() => {
-        sendChatMessage(String(Number(messageText) * 60 * 60 * 1000))
-      }}>+1 Hour</button>
-      <button onClick={() => {
-        sendChatMessage(String(Number(messageText) * 24 * 60 * 60 * 1000))
-      }}>+1 Day</button>
-      <button onClick={() => {
-        sendChatMessage(String(Number(messageText) * -60 * 60 * 1000))
-      }}>-1 Hour</button>
-      <button onClick={() => {
-        sendChatMessage(String(Number(messageText) * -24 * 60 * 60 * 1000))
-      }}>-1 Day</button>
+      <div>
+        <button onClick={() => {
+          sendChatMessage(String(Number(messageText) * 60 * 60 * 1000))
+        }}>+1 Hour</button>
+        <button onClick={() => {
+          sendChatMessage(String(Number(messageText) * 24 * 60 * 60 * 1000))
+        }}>+1 Day</button>
+      </div>
+      <div>
+        <button onClick={() => {
+          sendChatMessage(String(Number(messageText) * -60 * 60 * 1000))
+        }}>-1 Hour</button>
+        <button onClick={() => {
+          sendChatMessage(String(Number(messageText) * -24 * 60 * 60 * 1000))
+        }}>-1 Day</button>
+      </div>
     </div>
   )
 }
