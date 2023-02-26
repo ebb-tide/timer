@@ -12,7 +12,6 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">Next.js Chat Demo</h1>
         <AblyChatComponent />
       </main>
 
