@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useChannel } from "./AblyReactEffect";
-import styles from './AblyChatComponent.module.css';
 
 const AblyChatComponent = () => {
 
@@ -28,17 +27,17 @@ const AblyChatComponent = () => {
 
   const messages = receivedMessages.map((message, index) => {
     // const author = message.connectionId === ably.connection.id ? "me" : "other";
-    return <span key={index} className={styles.message} data-author={"me"}>{message.data}</span>;
+    return <span key={index} data-author={"me"}>{message.data}</span>;
   });
 
   return (
     <div>
-      <div>
+      <div className='update'>
         {messages}
       </div>
 
-      <div>
-        <textarea
+      <div className="update">
+        <textarea className='textbox'
           ref={(element) => { inputBox = element; }}
           value={messageText}
           onChange={e => setMessageText(e.target.value)}

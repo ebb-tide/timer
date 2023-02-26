@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useChannel } from "./AblyReactEffect";
-import styles from './AblyChatComponent.module.css';
 
 const AblyChatComponent = () => {
   // * On page load, calculate time to Tuesday Noon
@@ -25,29 +24,40 @@ const AblyChatComponent = () => {
     const minutes = Math.floor(hoursms / (60*1000));
     const minutesms = ms % (60*1000);
     const sec = Math.floor(minutesms / 1000);
-    return days + " Days " + hours + ":" + minutes + ":" + sec;
+    return days + " days " + hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0") + ":" + sec.toString().padStart(2, "0");
   }
 
   const [dueDate, setDueDate] = useState(new Date(2023, 1, 28, 12, 0, 0, 0));
+  const [calibrationTime, setCalibrationTime] = useState(0);
   const [timerString, setTimerString] = useState(calculateTimeToDueDate(dueDate));
   const [channel, ably] = useChannel("chat-demo", (message) => {
     console.log("received message")
     const dueDateAsMs = dueDate.getTime();
     const adjustedDueDateAsMs = dueDateAsMs + parseInt(message.data);
     setDueDate(new Date(adjustedDueDateAsMs));
+    setCalibrationTime(2000);
   });
 
   // Run function every 1 second to update timer
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimerString(calculateTimeToDueDate(dueDate));
+      let calibTime = calibrationTime
+      if (calibTime > 0) {
+        setTimerString("CALIBRATING...");
+        setCalibrationTime(calibTime - 1000);
+        console.log("calibrationTime", calibTime)
+      } else {
+        setTimerString(calculateTimeToDueDate(dueDate));
+      }
     }, 1000);
     return () => clearInterval(interval);
-  }, [dueDate]);
+  }, [dueDate, calibrationTime]);
 
   return (
-    <div className='timer'>
-      {timerString}
+    <div className='display'>
+      <div className={timerString == "CALIBRATING..." ? "calibrator" : "timer"}>
+        {timerString}
+      </div>
     </div>
   )
 }
