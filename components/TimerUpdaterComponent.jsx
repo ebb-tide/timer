@@ -5,7 +5,6 @@ import styles from './AblyChatComponent.module.css';
 const AblyChatComponent = () => {
 
   let inputBox = null;
-  let messageEnd = null;
   const [messageText, setMessageText] = useState("");
   const [receivedMessages, setMessages] = useState([{connectionId:"me", data:"mpoo"}]);
   const messageTextIsEmpty = messageText.trim().length === 0;
