@@ -25,6 +25,7 @@ const AblyChatComponent = () => {
     sendChatMessage(messageText);
   }
 
+
   const messages = receivedMessages.map((message, index) => {
     // const author = message.connectionId === ably.connection.id ? "me" : "other";
     return <span key={index} data-author={"me"}>{message.data}</span>;
